@@ -26,8 +26,9 @@ namespace AFCart
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddCors();
 
-            var connection = @"Server=DESKTOP-BAPHS9G\SQLEXPRESS;Database=AFCart;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=DESKTOP-BAPHS9G\SQLEXPRESS;Database=NikNok;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<AFCartContext>(options => options.UseSqlServer(connection));
         }
 
@@ -39,6 +40,10 @@ namespace AFCart
                 app.UseDeveloperExceptionPage();
             }
 
+
+            // Shows UseCors with CorsPolicyBuilder.
+            app.UseCors(builder =>
+               builder.WithOrigins("*"));
             app.UseMvc();
         }
     }
